@@ -14,8 +14,9 @@ def update_wc(sender):
     path = info[0].split('/')[-1]
     file_name = info[1]
     cb.set(editor.get_text())
-    #print 'file name - ', file_name
-    url = 'working-copy://x-callback-url/write/?repo=' + path + '&path=' + file_name + '&x-success=pythonista://'
+    encoded_p = path.replace(' ', '%20')
+    encoded_f = file_name.replace(' ', '%20')
+    url = 'working-copy://x-callback-url/write/?repo=' + encoded_p + '&path=' + encoded_f + '&x-success=pythonista://'
     wb.open(url)
 
 @ui.in_background    
@@ -24,7 +25,8 @@ def commit(sender):
     path = info[0].split('/')[-1]
     message = console.input_alert('Commit Message', 'Attach a message to your commit')
     encoded_m = message.replace(' ', '%20')
-    url = 'working-copy://x-callback-url/commit/?repo=' + path + '&message=' + encoded_m + '&x-success=pythonista://'
+    encoded_p = path.replace(' ', '%20')
+    url = 'working-copy://x-callback-url/commit/?repo=' + encoded_p + '&message=' + encoded_m + '&x-success=pythonista://'
     wb.open(url)
     
 @ui.in_background    
@@ -34,7 +36,9 @@ def commitOne(sender):
     path = info[0].split('/')[-1]
     message = console.input_alert('Commit Message', 'Attach a message to your commit')
     encoded_m = message.replace(' ', '%20')
-    url = 'working-copy://x-callback-url/commit/?repo=' + path + '&path=' + file_name + '&message=' + encoded_m + '&x-success=pythonista://'
+    encoded_p = path.replace(' ', '%20')
+    encoded_f = file_name.replace(' ', '%20')
+    url = 'working-copy://x-callback-url/commit/?repo=' + encoded_p + '&path=' + encoded_f + '&message=' + encoded_m + '&x-success=pythonista://'
     wb.open(url)
     
 def pushRepo(sender):
