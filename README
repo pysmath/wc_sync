@@ -1,0 +1,1 @@
+This is a project for making working with github in pythonista easier. It uses x-callback-url to get repository data from github through the app "Working Copy".
