@@ -28,13 +28,27 @@ def commit(sender):
     wb.open(url)
     
 @ui.in_background    
-def commitOne(sender):
+def commitOne(sender):                                                                                                   
     info = os.path.split(editor.get_path())
     file_name = info[1]
     path = info[0].split('/')[-1]
     message = console.input_alert('Commit Message', 'Attach a message to your commit')
     encoded_m = message.replace(' ', '%20')
     url = 'working-copy://x-callback-url/commit/?repo=' + path + '&path=' + file_name + '&message=' + encoded_m + '&x-success=pythonista://'
+    wb.open(url)
+    
+def pushRepo(sender):
+    info = os.path.split(editor.get_path())
+    path = info[0].split('/')[-1]
+    encoded_p = path.replace(' ', '%20')
+    url = 'working-copy://x-callback-url/push/?repo=' + encoded_p
+    wb.open(url)
+    
+def pullRepo(sender):
+    info = os.path.split(editor.get_path())
+    path = info[0].split('/')[-1]
+    encoded_p = path.replace(' ', '%20')
+    url = 'working-copy://x-callback-url/pull/?repo=' + encoded_p
     wb.open(url)
 
 view = ui.load_view('Working_Copy_Sync')
