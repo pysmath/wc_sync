@@ -1,1 +1,9 @@
 This is a project for making working with github in pythonista easier. It uses x-callback-url to get repository data from github through the app "Working Copy".
+
+Before using this you need to have a remote repository set up, and of course have working copy installed and hooked up to your github (or other service) account. Then you can either download a repository, or initialize a new one and hook it up to one online by specifying the remote url. Now you're ready to work in pythonista.
+
+The edit icon will write the latest script to the working copy copy of the file. If the file is new it will be added in working copy as a new file in the repository. Note that this simply overwrites everything. This is not great for version control as the whole thing is shown as being changed, but I don't see a better way to do this with working copy's x-callback-url functionality.
+
+The check mark commits the current file for the next upload. The circled checkmark commits the entire repository.
+
+The upload and download icons push and pull the repository.
