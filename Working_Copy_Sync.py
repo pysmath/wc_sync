@@ -10,10 +10,22 @@ import urllib
 
 #cb.set(editor.get_text())
 
+@ui.in_background
 def update_wc(sender):
     info = os.path.split(editor.get_path())
     repo = info[0].split('/')[-1]
     path = info[1]
+    path = console.input_alert('File Name', 'Specify which file to update on Working Copy', path)
+    cb.set(editor.get_text())
+    url = 'working-copy://x-callback-url/write/?'
+    f = {'repo':repo,'path':path,'x-success':'pythonista://'}
+    url += urllib.urlencode(f).replace('+','%20')
+    wb.open(url)
+    
+def add_pyui(sender):
+    info = os.path.split(editor.get_path())
+    repo = info[0].split('/')[-1]
+    path = info[1] + ui
     cb.set(editor.get_text())
     url = 'working-copy://x-callback-url/write/?'
     f = {'repo':repo,'path':path,'x-success':'pythonista://'}
