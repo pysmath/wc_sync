@@ -2,10 +2,18 @@ This is a project for making working with github in pythonista easier. It uses x
 
 Before using this you need to have a remote repository set up, and of course have working copy installed and hooked up to your github (or other service) account. Then you can either download a repository, or initialize a new one and hook it up to one online by specifying the remote url. Now you're ready to work in pythonista.
 
+The top button is a place holder. It's meant to copy the contents of the working copy copy of the file and update the pythonista file, but it's not working yet.
+
 The edit icon will write the latest script to the working copy copy of the file. If the file is new it will be added in working copy as a new file in the repository.
 
 The check mark commits the current file for the next upload. The circled checkmark commits the entire repository.
 
 The upload and download icons push and pull the repository.
 
-Known Issues: subdirectories in the repository will cause failures.
+Known Issues: 
+
+Copy from Working Copy doesn't work yet.
+
+subdirectories in the repository will cause failures.
+
+Pulling the repo only updates the files within working copy and does not pull them into pythonista. There doesn't seem to be a good way to pull changes into pythonista using x-callback-url.

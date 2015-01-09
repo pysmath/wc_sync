@@ -8,7 +8,9 @@ import webbrowser as wb
 import clipboard as cb
 import urllib
 
-#cb.set(editor.get_text())
+def copy_from_wc(sender):
+    # I haven't gotten this function to work yet. I tried having working copy read the contents of a file and then call another script that would update the file on pythonista, but I can't get pythonista to run files with the URL scheme for some reason.
+    pass
 
 @ui.in_background
 def update_wc(sender):
@@ -56,7 +58,7 @@ def commitOne(sender):
 def pushRepo(sender):
     info = os.path.split(editor.get_path())
     repo = info[0].split('/')[-1]
-    f = {'repo':repo}
+    f = {'repo':repo, 'x-success':'pythonista://'}
     url = 'working-copy://x-callback-url/push/?'
     url += urllib.urlencode(f).replace('+','%20')
     wb.open(url)
@@ -64,7 +66,7 @@ def pushRepo(sender):
 def pullRepo(sender):
     info = os.path.split(editor.get_path())
     repo = info[0].split('/')[-1]
-    f = {'repo':repo}
+    f = {'repo':repo, 'x-success':'pythonista://'}
     url = 'working-copy://x-callback-url/pull/?'
     url += urllib.urlencode(f).replace('+','%20')
     wb.open(url)
