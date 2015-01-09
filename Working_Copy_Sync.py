@@ -6,17 +6,18 @@ import os.path
 import console
 import webbrowser as wb
 import clipboard as cb
+import urllib
 
 #cb.set(editor.get_text())
 
 def update_wc(sender):
     info = os.path.split(editor.get_path())
-    path = info[0].split('/')[-1]
-    file_name = info[1]
+    repo = info[0].split('/')[-1]
+    path = info[1]
     cb.set(editor.get_text())
-    encoded_p = path.replace(' ', '%20')
-    encoded_f = file_name.replace(' ', '%20')
-    url = 'working-copy://x-callback-url/write/?repo=' + encoded_p + '&path=' + encoded_f + '&x-success=pythonista://'
+    url = 'working-copy://x-callback-url/write/?'
+    f = {'repo':repo,'path':path,'x-success':'pythonista://'}
+    url += urllib.urlencode(f).replace('+','%20')
     wb.open(url)
 
 @ui.in_background    
@@ -24,10 +25,13 @@ def commit(sender):
     info = os.path.split(editor.get_path())
     path = info[0].split('/')[-1]
     message = console.input_alert('Commit Message', 'Attach a message to your commit')
-    encoded_m = message.replace(' ', '%20')
-    encoded_p = path.replace(' ', '%20')
-    url = 'working-copy://x-callback-url/commit/?repo=' + encoded_p + '&message=' + encoded_m + '&x-success=pythonista://'
-    wb.open(url)
+#    encoded_m = message.replace(' ', '%20')
+#    encoded_p = path.replace(' ', '%20')
+#    url = 'working-copy://x-callback-url/commit/?repo=' + path + '&message=' + message + '&x-success=pythonista://'
+    url = 'working-copy://x-callback-url/commit/?'
+    f = {'repo':repo,'message':message,'x-success':'pythonista://'}
+    url += urllib.urlencode(f).replace('+','%20')
+    wb.open(urllib.urlencode(url))
     
 @ui.in_background    
 def commitOne(sender):                                                                                                   
