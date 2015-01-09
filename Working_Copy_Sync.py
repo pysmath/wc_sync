@@ -28,7 +28,6 @@ def commit(sender):
     url = 'working-copy://x-callback-url/commit/?'
     f = {'repo':repo,'message':message,'x-success':'pythonista://'}
     url += urllib.urlencode(f).replace('+','%20')
-    print url
     wb.open(url)
     
 @ui.in_background    
@@ -44,16 +43,18 @@ def commitOne(sender):
     
 def pushRepo(sender):
     info = os.path.split(editor.get_path())
-    path = info[0].split('/')[-1]
-    encoded_p = path.replace(' ', '%20')
-    url = 'working-copy://x-callback-url/push/?repo=' + encoded_p
+    repo = info[0].split('/')[-1]
+    f = {'repo':repo}
+    url = 'working-copy://x-callback-url/push/?'
+    url += urllib.urlencode(f).replace('+','%20')
     wb.open(url)
     
 def pullRepo(sender):
     info = os.path.split(editor.get_path())
-    path = info[0].split('/')[-1]
-    encoded_p = path.replace(' ', '%20')
-    url = 'working-copy://x-callback-url/pull/?repo=' + encoded_p
+    repo = info[0].split('/')[-1]
+    f = {'repo':repo}
+    url = 'working-copy://x-callback-url/pull/?'
+    url += urllib.urlencode(f).replace('+','%20')
     wb.open(url)
 
 view = ui.load_view('Working_Copy_Sync')
