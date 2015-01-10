@@ -16,4 +16,4 @@ Copy from Working Copy doesn't work yet.
 
 subdirectories in the repository will cause failures.
 
-Pulling the repo only updates the files within working copy and does not pull them into pythonista. There doesn't seem to be a good way to pull changes into pythonista using x-callback-url.
+Pulling the repo only updates the files within working copy and does not pull them into pythonista. I'm working on getting the copy function to work, and then I can put that in series with a pull command.
