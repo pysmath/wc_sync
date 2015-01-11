@@ -22,7 +22,6 @@ def copy_from_wc(sender): # Copies the text from the working copy version of the
     f = {'repo':repo,'path':path,'key':key}
     url += urllib.urlencode(f).replace('+','%20')
     url += '&x-success=' + urllib.quote_plus(success) + '%2520'
-    print url
     wb.open(url)
 
 @ui.in_background
