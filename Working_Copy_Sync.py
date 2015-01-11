@@ -10,20 +10,23 @@ import urllib
 
 key = 'YourKeyHere'
 
-def copy_from_wc(sender):
-    # I haven't gotten this function to work yet.
+def open_wc(sender): # Opens working copy
+    wb.open('working-copy://')
+
+def copy_from_wc(sender): # Copies the text from the working copy version of the file and uses it to overwrite the contents of the corresponding file in pythonista.
     info = os.path.split(editor.get_path())
     repo = info[0].split('/')[-1]
     path = info[1]
     url = 'working-copy://x-callback-url/read/?'
-    success = 'pythonista://WC_Sync/Update.py?action=run&args=' + editor.get_path() + ' '
-    f = {'repo':repo,'path':path,'key':key,'x-success':success}
+    success = 'pythonista://WC_Sync/Update.py?action=run&args=' + editor.get_path() #+ '+'
+    f = {'repo':repo,'path':path,'key':key}
     url += urllib.urlencode(f).replace('+','%20')
+    url += '&x-success=' + urllib.quote_plus(success) + '%2520'
     print url
     wb.open(url)
 
 @ui.in_background
-def update_wc(sender):
+def update_wc(sender): # Sends the contents of the file in pythonista to overwrite the working copy version.
     info = os.path.split(editor.get_path())
     repo = info[0].split('/')[-1]
     path = info[1]
@@ -35,7 +38,7 @@ def update_wc(sender):
     wb.open(url)
     
 @ui.in_background    
-def commit(sender):
+def commit(sender): # Commits all files in the current repository.
     info = os.path.split(editor.get_path())
     repo = info[0].split('/')[-1]
     message = console.input_alert('Commit Message', 'Attach a message to your commit')
@@ -45,7 +48,7 @@ def commit(sender):
     wb.open(url)
     
 @ui.in_background    
-def commitOne(sender):                                                                                                   
+def commitOne(sender): # Commits only the current file.                                                                                          
     info = os.path.split(editor.get_path())
     repo = info[0].split('/')[-1]
     path = info[1]
@@ -55,7 +58,7 @@ def commitOne(sender):
     url += urllib.urlencode(f).replace('+','%20')
     wb.open(url)
     
-def pushRepo(sender):
+def pushRepo(sender): # Push the working copy version of the repository to the remote repository.
     info = os.path.split(editor.get_path())
     repo = info[0].split('/')[-1]
     f = {'repo':repo,'key':key,'x-success':'pythonista://'}
@@ -63,7 +66,7 @@ def pushRepo(sender):
     url += urllib.urlencode(f).replace('+','%20')
     wb.open(url)
     
-def pullRepo(sender):
+def pullRepo(sender): # Pulls the remote repository to working copy. Note that this does not pull it all the way into pythonista as of now. Each file must be updated in pythonista individually with copy_from_wc function.
     info = os.path.split(editor.get_path())
     repo = info[0].split('/')[-1]
     f = {'repo':repo,'key':key,'x-success':'pythonista://'}

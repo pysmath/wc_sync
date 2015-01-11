@@ -1,18 +1,20 @@
-This is a project for making working with github in pythonista easier. It uses x-callback-url to get repository data from github through the app "Working Copy".
+This is a project for making working with github in pythonista easier. It uses x-callback-url to get repository data from github through the app "Working Copy". Note that x-callback-url functionality is only in the beta version of working copy right now, so if you want this to work you will need to become a beta tester, or wait for the next official release. There is a link on working copy's webpage about how to become a beta tester. I am not affiliated with working copy in any way. I will not benefit from you using it, and make no promises about the quality of the software. This code is also provided without guarantee, and you should test it before trusting your code to it.
 
-Before using this you need to have a remote repository set up, and of course have working copy installed and hooked up to your github (or other service) account. Then you can either download a repository, or initialize a new one and hook it up to one online by specifying the remote url. Now you're ready to work in pythonista.
+Before using this you need to have a remote repository set up, and of course have working copy installed and hooked up to your github (or other service) account. Then you can either download a repository, or initialize a new one and hook it up to one online by specifying the remote url. 
 
-The top button is a place holder. It's meant to copy the contents of the working copy copy of the file and update the pythonista file, but it's not working yet.
+Finally, you need to set a key in the x-callback-url section of working copy settings. Now you're ready to work in pythonista.
+
+Copy your key that you set in working copy and paste it in where it says "YourKeyHere" in working_copy_sync.py. You may also have to make sure the path to update.py matches what's in the copy_from_wc function.
+
+The clipboard button will ask working copy for the contents of the file that corresponds to the current open file and write them over the current contents. You won't see the change until you close and open the file.
 
 The edit icon will write the latest script to the working copy copy of the file. If the file is new it will be added in working copy as a new file in the repository.
 
 The check mark commits the current file for the next upload. The circled checkmark commits the entire repository.
 
-The upload and download icons push and pull the repository.
+The upload and download icons push and pull the repository. Note that they are pushing what's in working copy, and pulling from remote to working copy. It doesn't push what's in pythonista, nor does it pull from remote directly into pythonista... yet.
 
 Known Issues: 
-
-Copy from Working Copy doesn't work yet.
 
 subdirectories in the repository will cause failures.
 
