@@ -13,15 +13,18 @@ key = 'YourKeyHere'
 def open_wc(sender): # Opens working copy
     wb.open('working-copy://')
 
+@ui.in_background
 def copy_from_wc(sender): # Copies the text from the working copy version of the file and uses it to overwrite the contents of the corresponding file in pythonista.
     info = os.path.split(editor.get_path())
     repo = info[0].split('/')[-1]
     path = info[1]
+    path = console.input_alert('File Name', 'Specify which file to pull from Working Copy', path)
     url = 'working-copy://x-callback-url/read/?'
     success = 'pythonista://WC_Sync/Update.py?action=run&args=' + editor.get_path() #+ '+'
     f = {'repo':repo,'path':path,'key':key}
     url += urllib.urlencode(f).replace('+','%20')
     url += '&x-success=' + urllib.quote_plus(success) + '%2520'
+    #print url
     wb.open(url)
 
 @ui.in_background
@@ -72,6 +75,10 @@ def pullRepo(sender): # Pulls the remote repository to working copy. Note that t
     url = 'working-copy://x-callback-url/pull/?'
     url += urllib.urlencode(f).replace('+','%20')
     wb.open(url)
+    
+def add_repo(sender):
+    path = editor.get_path().split('/')
+    print path
 
 view = ui.load_view('Working_Copy_Sync')
 
