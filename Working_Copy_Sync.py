@@ -20,7 +20,7 @@ def copy_from_wc(sender): # Copies the text from the working copy version of the
     path = info[1]
     path = console.input_alert('File Name', 'Specify which file to pull from Working Copy', path)
     url = 'working-copy://x-callback-url/read/?'
-    success = 'pythonista://WC_Sync/Update.py?action=run&args=' + editor.get_path() #+ '+'
+    success = 'pythonista://WC_Sync/Update.py?action=run&argv=' + editor.get_path() #+ '+'
     f = {'repo':repo,'path':path,'key':key}
     url += urllib.urlencode(f).replace('+','%20')
     url += '&x-success=' + urllib.quote_plus(success) + '%2520'
