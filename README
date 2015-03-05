@@ -1,21 +1,33 @@
-This is a project for making working with github in pythonista easier. It uses x-callback-url to get repository data from github through the app "Working Copy". Note that x-callback-url functionality is only in the beta version of working copy right now, so if you want this to work you will need to become a beta tester, or wait for the next official release. There is a link on working copy's webpage about how to become a beta tester. I am not affiliated with working copy in any way. I will not benefit from you using it, and make no promises about the quality of the software. This code is also provided without guarantee, and you should test it before trusting your code to it.
+1. Introduction
+
+This is a project for making working with github in pythonista easier. It uses x-callback-url to get repository data from github through the app "Working Copy". I am not affiliated with Working Copy in any way. I will not benefit from you using it, and make no promises about the quality of the software. This code is also provided without guarantee, and you should test it before trusting your code to it.
+
+This code was based on wc_sync by pysmath, https://github.com/pysmath.
+
+2. Setup
 
 Before using this you need to have a remote repository set up, and of course have working copy installed and hooked up to your github (or other service) account. Then you can either download a repository, or initialize a new one and hook it up to one online by specifying the remote url. 
 
-Finally, you need to set a key in the x-callback-url section of working copy settings. Now you're ready to work in pythonista.
+Finally, you need to enable x-callback-url in the working copy settings. Now you're ready to work in pythonista.
 
-Copy your key that you set in working copy and paste it in where it says "YourKeyHere" in working_copy_sync.py. You may also have to make sure the path to update.py matches what's in the copy_from_wc function.
+The first time you run the code it will ask you for the Working Copy key. This will be stored in the Pythonista keychain so you will not need to enter it again.
 
-The clipboard button will ask working copy for the contents of the file that corresponds to the current open file and write them over the current contents. You won't see the change until you close and open the file.
+You will also have to set INSTALL_PATH to match the path where you have installed rxFile.py and rxZip.py.  This should not have a leading or trailing '/'.
 
-The edit icon will write the latest script to the working copy copy of the file. If the file is new it will be added in working copy as a new file in the repository.
+3. Instructions
 
-The check mark commits the current file for the next upload. The circled checkmark commits the entire repository.
+The bookmark icon will open Working Copy.
 
-The upload and download icons push and pull the repository. Note that they are pushing what's in working copy, and pulling from remote to working copy. It doesn't push what's in pythonista, nor does it pull from remote directly into pythonista... yet.
+The copy icon will clone a respository within Working Copy into Pythonista.  A directory with the same name as the repository will be created in the root of the Pythonista file system.  If the files already exist they will be overwritten, you will be warned if the top level directory already exists.
 
-Known Issues: 
+The download icon will download the version of the file from Working Copy and overwrite the version in Pythonista.  The file will be downloaded from the repository with the same name as the top level directory within the Pythonista file system.
 
-subdirectories in the repository will cause failures.
+The upload icon will write the latest script to the Working Copy version of the file. If the file is new it will be added in working copy as a new file in the repository.  The file will be written into the repository with the same name as the top level directory within the Pythonista file system, any intermediate directories will be created in the Working Copy repository. 
 
-Pulling the repo only updates the files within working copy and does not pull them into pythonista. I'm working on getting the copy function to work, and then I can put that in series with a pull command.
+The filmstrip icon will upload the pyui file relating to the python script to Working Copy.  The file will be written into the repository with the same name as the top level directory within the Pythonista file system, any intermediate directories will be created in the Working Copy repository
+
+4. Known Issues
+
+Requires Working Copy 1.5 or better.
+
+Local files have to have their top level directory (repository name) in the root of the Pythonista file system.
